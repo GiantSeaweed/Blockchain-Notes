@@ -93,11 +93,11 @@ Take Bitcoin as an example.
 Take Bitcoin [Block #502426](https://www.blockchain.com/btc/block/00000000000000000020c60222099aaebc6e7795784f74628ec640b223d3d339) as an example.
 
 There are three main sections:
-- Header/Summary
+- Header
 - Hashes
 - Transactions
 
-|Summary/Header||
+|Summary||
 |:--|--|
 |Number Of Transactions	|3189|
 |Output Total|	12,402.76465986 BTC|
@@ -115,31 +115,44 @@ There are three main sections:
 |Nonce	|2469953656|
 |Block Reward|	12.5 BTC|
 
-### Number of transactions
-    It means this block contains 3189 pieces of transaction records. Actually you can find them on the link above.
+#### Number of transactions
 
-### Timestamp
-    Seconds from Unix Epoch. When the block was created.
+It means this block contains 3189 pieces of transaction records. Actually you can find them on the link above.
 
-### Bits & Difficulty
-    Bits field 402690497 expresses the Proof-of-Work target as a coeffieint/exponent format and serves as a threshold. 
+#### Timestamp
+Seconds from Unix Epoch. When the block was created.
 
-    If we convert this number in hexadecimal, we get this: 0x180091C1.The first two hexadecimals digits ( 18 ) are the exponent, the next six ( 0091C1 ) are the coefficient. Here is the formula used to calculate the target from this:
+#### Bits & Difficulty
+Bits field 402690497 expresses the Proof-of-Work target as a coeffieint/exponent format and serves as a threshold. 
+
+If we convert this number in hexadecimal, we get this: 0x180091C1.The first two hexadecimals digits ( 18 ) are the exponent, the next six ( 0091C1 ) are the coefficient. Here is the formula used to calculate the target from this:
 
 \[  target = coefficient * 28 * (exponent - 3) \]
 
-### Nonce
-    This field is initialized to zero and increases by one. The goal is to find a value for the nonce that will results in hash lower than the target. So, the mining node will try billions or trillions of nonce values before it gets a valid hash.
+#### Nonce
+This field is initialized to zero and increases by one. The goal is to find a value for the nonce that will results in hash lower than the target. So, the mining node will try billions or trillions of nonce values before it gets a valid hash.
 
 |Hashes||
 |:--|--|
 |Hash	|00000000000000000020c60222099aaebc6e7795784f74628ec640b223d3d339|
 |Previous Block|0000000000000000002e0350f057215ca847eb62d1422695f912a6866472340e|
+|Merkle |root0fdde62cdb108811e0bf04cd16a634742140ebef4e5306005e5b50caa66b893c|
+#### Hash
 
+This is created by hashing the block header twice with the SHA256 algorithm
+
+#### Previous Block
+
+Remember that every block uses the previous block's hash to construct its own hash.
+
+#### Merkle Tree
+
+A merkle tree is constructed by recursively hashing pairs of nodes ( in this case, transactions ), until there is only one hash, called the root or merkle root. You can click [here](https://dev.to/damcosset/blockchain-what-is-in-a-block-48jo) for a more visualized explanation.
 
 ## Reference
 - [Blockchain Wiki](https://en.wikipedia.org/wiki/Blockchain)
 - [An adorable App Demo of Blockchain](https://medium.freecodecamp.org/how-does-blockchain-really-work-i-built-an-app-to-show-you-6b70cd4caf7d)
+- [What is in a block](https://dev.to/damcosset/blockchain-what-is-in-a-block-48jo)
 - [A detailed explanation of the mining process](https://dev.to/damcosset/blockchain-what-is-mining-2eod)
     
 
