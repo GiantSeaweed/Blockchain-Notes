@@ -12,7 +12,7 @@
 - [Reference](#reference)
 
 ## What is the process of mining?
-Take Bitcoin as an example.
+Take Bitcoin as an example. Suppose the miner Joe is competing for the block 502425 (but failed).
 
 1. Competing to validate
 
@@ -93,7 +93,7 @@ Take Bitcoin as an example.
 Take Bitcoin [Block #502426](https://www.blockchain.com/btc/block/00000000000000000020c60222099aaebc6e7795784f74628ec640b223d3d339) as an example.
 
 There are three main sections:
-- Header
+- Summary
 - Hashes
 - Transactions
 
