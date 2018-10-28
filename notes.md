@@ -6,10 +6,14 @@
 >
 > If you find something wrong, please let me know: swfeng98 _at_ gmail _dot_ com
 
-## Context
+## Contents
 - [What is the process of mining?](#what-is-the-process-of-mining)
 - [What does a block contain?](#what-does-a-block-contain)
+- [Where are the bitcoin transactions stored?](#where-are-the-bitcoin-transactions-stored)
+- [Are there any options for blockchain to store data?](#are-there-any-options-for-blockchain-to-store-data)
 - [Reference](#reference)
+
+--- 
 
 ## What is the process of mining?
 Take Bitcoin as an example. Suppose the miner Joe is competing for the block 502425 (but failed).
@@ -87,7 +91,7 @@ Take Bitcoin as an example. Suppose the miner Joe is competing for the block 502
     - All transactions within the blocks are valid ( also have a checklist on their own )
 
     
-
+--- 
 
 ## What does a block contain?
 Take Bitcoin [Block #502426](https://www.blockchain.com/btc/block/00000000000000000020c60222099aaebc6e7795784f74628ec640b223d3d339) as an example.
@@ -149,11 +153,90 @@ Remember that every block uses the previous block's hash to construct its own ha
 
 A merkle tree is constructed by recursively hashing pairs of nodes ( in this case, transactions ), until there is only one hash, called the root or merkle root. You can click [here](https://dev.to/damcosset/blockchain-what-is-in-a-block-48jo) for a more visualized explanation.
 
+--- 
+
+## Where are the bitcoin transactions stored?
+There are two types of nodes in blockchain - **full node** and **lightweight node**.
+
+Full nodes needs to have a copy of the entire blockchain, so every transaction and block that has ever taken place on the blockchain must be downloaded.
+
+Lightweight nodes verify transactions using a method called simplified payment verification (SPV). SPV allows a node to verify if a transaction has been included in a block, without having to download the entire blockchain. With SPV, full nodes serve lightweight nodes by allowing them to connect and transmit their transactions to the network, and will notify them when a transaction affects them. A lightweight node need only download the headers of all blocks on the blockchain, which means that download and storage requirements are significantly less intensive than that of a full node.
+
+--- 
+
+## Are there any options for blockchain to store data?
+
+Decentralized storage options are:
+- Storing everything in blockchain itself
+- Peer to peer file system, such as IPFS
+- Decentralized cloud file storages, such as Storj, Sia, Ethereum Swarm, etc.
+- Distributed Databases, such as Apache Cassandra, Rethink DB, etc.
+- BigChainDB
+- Ties DB
+
+1. Storing everything in blockchain itself
+Storing everything in blockchain is the simplest solution
+**_Drawback_**: 
+    - Transactions to blockchain are slow to confirm. 
+    - The immutability is the strength of blockchain that gives it high robustness but it is a weakness for a data storage. User may change their profile or replace their photo, still all the previous data will sit in blockchain forever and can be seen by anyone.
+
+2. Peer to peer file system, such as IPFS
+InterPlanetary File System(IPFS) allows to share files on client computers and unites them in the global file system. The technology is based on BitTorrent protocol and Distributed Hash Table.
+    **_Advantages_**:
+    -  It is really peer to peer - to share anything first put it on your own computer. It will be downloaded only if anyone needs it.
+    -  It is content addressable, so it is impossible to forge content by the given address. Popular files can be downloaded very quickly thanks to BitTorrent protocol.
+
+    **_Drawbacks_**:
+    - You should stay online if you want to share your files. At least before someone becomes interested and wants to download them from you. 
+    - It serves only static files, they can not be modified or removed once uploaded. And you can not search these files by their meaningful content.
+
+3. Decentralized cloud file storages, such as Storj, Sia, Ethereum Swarm, etc.
+From the user’s point of view these storages are just cloud storages like Dropbox, for example. The difference is that the content is hosted on user’s computers who offer their hard drive space for rent, rather than in datacenters.
+    **_Advantages_**:
+    - You don’t need to stay online to share your files anymore. Just upload the file and it is available in the cloud. These storages are highly reliable, fast enough, have enormous capacity.
+
+    **_Drawbacks_**:
+    - They serve static files only.
+    - No content search (since they are built on the rented hardware, they are not free).
+
+4. Distributed Databases, such as Apache Cassandra, Rethink DB, etc.
+    Since we need to store structured data and seek for advanced query capabilities we may look at the distributed noSql databases.
+
+    Why noSql? Because strict transactional SQL databases can not be truly distributed due to the restrictions of the CAP-theorem. To make a database distributed we must sacrifice either consistency or availability. NoSQL databases choose availability over consistency replacing it with so called “eventual consistency” where all the database nodes in the network become consistent some time later. 
+    **_Advantages_**:
+    - fast
+    - scalable
+    - fault tolerant
+    - support rich query language
+
+    **_Drawbacks_**: 
+    - They are not Byzantine-proof. All the nodes of the cluster fully trust each other. So any malicious node can destroy the whole database.
+5. BigChainDB
+    BigChainDB is build upon RethinkDB cluster(an NoSQL database mentiond above). BigChainDB uses it to store all the blocks and transactions. That is why it shows such a high throughput - it is the one of the underlying noSQL database. All the BigChainDB nodes are connected to the cluster and have full write access to the database. 
+    
+    **_Advantages_**:
+    - enormous data capacity 
+    - really fast transactions
+    - high throughput
+
+    **_Drawbacks_**:
+    -  The whole BigChainDB is not byzantine-proof! Any malicious BDB node can destroy the RethinkDB cluster. ( BigChainDB may be good for a private blockchain. )
+6. Ties DB
+    The TiesDB inherits the majority of features from the underlying noSQL databases and adds byzantine fault tolerance and incentives. With these features it can become a public database and enable feature-rich applications on Ethereum and other blockchains with smart contracts. 
+
+    The database is writable by any user. But the users are identified by their public key and all the requests are signed. Once created, record remembers its creator who becomes an owner of the record. After that the record can be modified only by the owner. 
+    
+    Everyone can read all records, because the database is public. All the permissions are checked on request and replication. Additional permissions can be managed via a smart contract.
+
+--- 
+
 ## Reference
 - [Blockchain Wiki](https://en.wikipedia.org/wiki/Blockchain)
 - [An adorable App Demo of Blockchain](https://medium.freecodecamp.org/how-does-blockchain-really-work-i-built-an-app-to-show-you-6b70cd4caf7d)
 - [What is in a block](https://dev.to/damcosset/blockchain-what-is-in-a-block-48jo)
 - [A detailed explanation of the mining process](https://dev.to/damcosset/blockchain-what-is-mining-2eod)
+- [Where are the bitcoin transactions stored](https://www.quora.com/Where-is-the-blockchain-ledger-of-bitcoin-transactions-stored-and-how-is-it-being-backed-up)
+- [How can blockchain be used as a database to store data?](https://www.quora.com/How-can-blockchain-be-used-as-a-database-to-store-data)
     
 
 
