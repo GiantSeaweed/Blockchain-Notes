@@ -177,7 +177,7 @@ Decentralized storage options are:
 1. Storing everything in blockchain itself
 Storing everything in blockchain is the simplest solution
 
-**_Drawback_**: 
+    **_Drawback_**: 
     - Transactions to blockchain are slow to confirm. 
     - The immutability is the strength of blockchain that gives it high robustness but it is a weakness for a data storage. User may change their profile or replace their photo, still all the previous data will sit in blockchain forever and can be seen by anyone.
 
@@ -206,7 +206,7 @@ From the user’s point of view these storages are just cloud storages like Drop
     Since we need to store structured data and seek for advanced query capabilities we may look at the distributed noSql databases.
 
     Why noSql? Because strict transactional SQL databases can not be truly distributed due to the restrictions of the CAP-theorem. To make a database distributed we must sacrifice either consistency or availability. NoSQL databases choose availability over consistency replacing it with so called “eventual consistency” where all the database nodes in the network become consistent some time later. 
-    
+
     **_Advantages_**:
     - fast
     - scalable
