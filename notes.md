@@ -176,12 +176,14 @@ Decentralized storage options are:
 
 1. Storing everything in blockchain itself
 Storing everything in blockchain is the simplest solution
+
 **_Drawback_**: 
     - Transactions to blockchain are slow to confirm. 
     - The immutability is the strength of blockchain that gives it high robustness but it is a weakness for a data storage. User may change their profile or replace their photo, still all the previous data will sit in blockchain forever and can be seen by anyone.
 
 2. Peer to peer file system, such as IPFS
 InterPlanetary File System(IPFS) allows to share files on client computers and unites them in the global file system. The technology is based on BitTorrent protocol and Distributed Hash Table.
+
     **_Advantages_**:
     -  It is really peer to peer - to share anything first put it on your own computer. It will be downloaded only if anyone needs it.
     -  It is content addressable, so it is impossible to forge content by the given address. Popular files can be downloaded very quickly thanks to BitTorrent protocol.
@@ -192,6 +194,7 @@ InterPlanetary File System(IPFS) allows to share files on client computers and u
 
 3. Decentralized cloud file storages, such as Storj, Sia, Ethereum Swarm, etc.
 From the user’s point of view these storages are just cloud storages like Dropbox, for example. The difference is that the content is hosted on user’s computers who offer their hard drive space for rent, rather than in datacenters.
+
     **_Advantages_**:
     - You don’t need to stay online to share your files anymore. Just upload the file and it is available in the cloud. These storages are highly reliable, fast enough, have enormous capacity.
 
@@ -203,6 +206,7 @@ From the user’s point of view these storages are just cloud storages like Drop
     Since we need to store structured data and seek for advanced query capabilities we may look at the distributed noSql databases.
 
     Why noSql? Because strict transactional SQL databases can not be truly distributed due to the restrictions of the CAP-theorem. To make a database distributed we must sacrifice either consistency or availability. NoSQL databases choose availability over consistency replacing it with so called “eventual consistency” where all the database nodes in the network become consistent some time later. 
+    
     **_Advantages_**:
     - fast
     - scalable
